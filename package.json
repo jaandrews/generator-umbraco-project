@@ -1,0 +1,35 @@
+{
+	"name": "generator-umbraco-project",
+	"version": "0.1.0",
+	"description": "Generates an umbraco web application, azure app and database and connects the project to a github repository.",
+	"repository": {
+		"type": "git",
+		"url": "jaandrews/generator-umbraco-project"
+	},
+	"contributors": [
+		{
+			"name": "Jesse Andrews",
+			"email": "jaandrews88@gmail.com",
+			"url": "https://github.com/jaandrews"
+		}
+	],
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"keywords": [
+		"yeoman-generator",
+		"Umbraco",
+		"Azure"
+	],
+	"dependencies": {
+		"generator-aspnet": "^0.0.75",
+		"yeoman-generator": "^0.20.3",
+		"azure-cli": "^0.9.9"
+	},
+	"devDependencies": {
+		"mocha": "^2.3.3"
+	},
+	"scripts": {
+		"test": "mocha"
+	}
+}
