@@ -24,7 +24,10 @@
 	"dependencies": {
 		"generator-aspnet": "^0.0.75",
 		"yeoman-generator": "^0.20.3",
-		"azure-cli": "^0.9.9"
+		"yosay": "^1.0.5",
+		"azure-cli": "^0.9.9",
+		"github": "^0.2.4",
+		"ghauth": "^3.0.0"
 	},
 	"devDependencies": {
 		"mocha": "^2.3.3"
