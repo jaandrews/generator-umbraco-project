@@ -1,6 +1,7 @@
 var generators = require('yeoman-generator');
-var aspnet = require('generator-aspnet');
 var yosay = require('yosay');
+var path = require('path');
+var dir = require('node-dir');
 var ghauth = require('ghauth');
 var GitHubApi = require('github');
 var github = new GitHubApi({
@@ -10,7 +11,7 @@ var github = new GitHubApi({
 	headers: {
 		'user-agent': 'umbraco-project-generator'
 	}
-})
+});
 
 module.exports = generators.Base.extend({
 	init: function() {
@@ -27,9 +28,6 @@ module.exports = generators.Base.extend({
 			};
 			done();
 		}.bind(this));
-	},
-	azure: function() {
-		
 	},
 	github: function() {
 		var done = this.async();
@@ -78,47 +76,38 @@ module.exports = generators.Base.extend({
 				}.bind(this));
 			}.bind(this));
 		}.bind(this))
+	},
+	setProjectType: function() {
+		var prompts = [{
+			type: 'list',
+			name: 'type',
+			message: 'What type of application do you want to create?',
+			choices: [{
+				name: 'Empty Application',
+				value: 'empty'
+			}, {
+				name: 'Umbraco Application',
+				value: 'umbraco'
+			}]
+		}];
+		var done = this.async();
+		this.prompt(prompts, function(props) {
+			this.data.type = props.type;
+			done();
+		}.bind(this));
+	},
+	initProject: function() {
+		this.sourceRoot(path.join(__dirname, '../../templates/projects'));
+		dir.files(this.sourceRoot() + '/shared', function(err, files) {
+			for (var i=0; i<files.length; i++) {
+			this.fs.copyTpl(files[i], this)
+			}
+		}.bind(this))
+		switch(this.data.type) {
+			case 'empty':
+				break;
+			case 'umbraco':
+				break;
+		}
 	}
-	// gitHubType: function() {
-	// 	var done = this.async();
-	// 	this.prompt({
-	// 		type: 'confirm',
-	// 		name: 'isOrganizationRepo',
-	// 		message: 'Is this repository for an organization?',
-	// 		default: false
-	// 	}, function(isOrganization) {
-	// 		this.data.github = {
-	// 			isOrganization: isOrganization
-	// 		};
-	// 		console.log(isOrganization);
-	// 		done();
-	// 	}.bind(this));
-	// },
-	// gitHubOrganization: function() {
-	// 	var done = this.async();
-	// 	this.prompt({
-	// 		type: 'confirm',
-	// 		name: 'isOrganizationRepo',
-	// 		message: 'Is this repository for an organization?',
-	// 		default: false
-	// 	}, function(isOrganization) {
-	// 		this.data.github = {
-	// 			isOrganization: isOrganization
-	// 		};
-	// 		console.log(isOrganization);
-	// 		done();
-	// 	}.bind(this));
-	// },
-	// gitHubAccess: function() {
-	// 	var done = this.async();
-	// 	this.prompt({
-	// 		type: 'confirm',
-	// 		name: 'githubAccess',
-	// 		message: 'Will it be a private repository?',
-	// 		default: false
-	// 	}, function(githubAccess) {
-	// 		this.data.github.isPrivate = githubAccess;
-	// 		done();
-	// 	}.bind(this));
-	// },
 });

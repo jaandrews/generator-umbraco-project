@@ -22,12 +22,13 @@
 		"Azure"
 	],
 	"dependencies": {
-		"generator-aspnet": "^0.0.75",
 		"yeoman-generator": "^0.20.3",
 		"yosay": "^1.0.5",
 		"azure-cli": "^0.9.9",
 		"github": "^0.2.4",
-		"ghauth": "^3.0.0"
+		"ghauth": "^3.0.0",
+		"path": "^0.12.7",
+		"node-dir": "^0.1.10"
 	},
 	"devDependencies": {
 		"mocha": "^2.3.3"
